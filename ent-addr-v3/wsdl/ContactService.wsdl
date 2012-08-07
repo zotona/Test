@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.elsevier.com/ContactService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:osb="http://www.elsevier.com/osb" name="ContactService" targetNamespace="http://www.elsevier.com/ContactService/">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="unqualified" attributeFormDefault="unqualified" targetNamespace="http://www.elsevier.com/ContactService/" xmlns:osb="http://www.elsevier.com/osb" >
+      <xsd:import namespace="http://www.elsevier.com/osb"
+				schemaLocation="../xsd/ContactV1.xsd" />
+      <xsd:element name="FormatContact">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="ContactPostal" type="osb:ContactPostalType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FormatContactResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Result" type="xsd:boolean"/>
+            <xsd:element name="ContactPostal" type="osb:ContactPostalType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SearchContact">
+      	<xsd:complexType>
+      		<xsd:sequence>
+				<xsd:element minOccurs="1" maxOccurs="1" name="ContactPostal" type="osb:ContactPostalType"/>
+      			<xsd:element minOccurs="1" maxOccurs="1" name="MaxResults" type="xsd:int"></xsd:element>
+      			<xsd:element minOccurs="0" maxOccurs="1" name="Options" type="osb:COptimaOptionSet"></xsd:element>
+			</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SearchContactResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			
+      			<xsd:element minOccurs="0" maxOccurs="unbounded" name="ContactPostal" type="osb:ContactPostalType"/>
+			</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="FormatContactRequest">
+    <wsdl:part element="tns:FormatContact" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="FormatContactResponse">
+    <wsdl:part element="tns:FormatContactResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SearchContactRequest">
+  	<wsdl:part name="parameters" element="tns:SearchContact"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SearchContactResponse">
+  	<wsdl:part name="parameters" element="tns:SearchContactResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ContactService">
+    <wsdl:operation name="FormatContact">
+      <wsdl:input message="tns:FormatContactRequest"/>
+      <wsdl:output message="tns:FormatContactResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="SearchContact">
+    	<wsdl:input message="tns:SearchContactRequest"></wsdl:input>
+    	<wsdl:output message="tns:SearchContactResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ContactServiceSOAP" type="tns:ContactService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="FormatContact">
+      <soap:operation soapAction="http://www.elsevier.com/ContactService/FormatContact"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+        <wsdl:operation name="SearchContact">
+      <soap:operation soapAction="http://www.elsevier.com/ContactService/SearchContact"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ContactService">
+    <wsdl:port binding="tns:ContactServiceSOAP" name="ContactServiceSOAP">
+      <soap:address location="http://to-be-defined-by-user"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

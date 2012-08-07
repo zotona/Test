@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified" 
+targetNamespace="http://www.elsevier.com/osb" xmlns:osb="http://www.elsevier.com/osb" >
+	<xs:element name="Contact" type="osb:ContactType">
+		<xs:annotation>
+			<xs:documentation>Main postal and electronic contact info</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ContactType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="ContactPostal" type="osb:ContactPostalType"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="ContactElectronic" type="osb:ContactElectronicType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContactPostalType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine1" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine2" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine3" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine4" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine5" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine6" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine7" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine8" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Company" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Building" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="SubBuilding" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Department" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Premise" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Street" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="SubStreet" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="POBox" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="City" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="SubCity" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Principality" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Region" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Postcode" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="DPS" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Cedex" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Country" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="CountryISO" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="ACR" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="TCR" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other1" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other2" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other3" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other4" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other5" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other6" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other7" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other8" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other9" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other10" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContactElectronicType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Type" type="osb:StyleType"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Quality1" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="StyleType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="email"/>
+			<xs:enumeration value="url"/>
+			<xs:enumeration value="ip"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
