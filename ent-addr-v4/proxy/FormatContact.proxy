@@ -149,6 +149,96 @@
               </con:route-node>
             </con:flow>
           </con:branch>
+          <con:branch name="ProcessContact">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="ProcessContactRoute">
+                <con:context>
+                  <con2:userNsDecl namespace="http://webservices.globaladdress.net" prefix="ext"/>
+                  <con2:varNsDecl namespace="http://www.elsevier.com/ContactService/" prefix="con"/>
+                </con:context>
+                <con:actions>
+                  <con3:route>
+                    <con2:id>_ActionId-4727687184013825418-6da6191d.139067722b5.-7e77</con2:id>
+                    <con3:service ref="ent-addr-v4/business/TrilliumService" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con3:operation>ProcessAddressV2010Q2</con3:operation>
+                    <con3:outboundTransform>
+                      <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-4727687184013825418-6da6191d.139067722b5.-7e3f</con2:id>
+                        <con1:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="ent-addr-v4/transformation/TransformProcessContactRequest"/>
+                            <con2:param name="processContact1">
+                              <con2:path>$body/con:ProcessContact</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con1:expr>
+                      </con1:replace>
+                    </con3:outboundTransform>
+                    <con3:responseTransform>
+                      <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-4727687184013825418-6da6191d.139067722b5.-7e07</con2:id>
+                        <con1:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="ent-addr-v4/transformation/TransformProcessContactResponse"/>
+                            <con2:param name="processAddressV2010Q2Response1">
+                              <con2:path>$body/ext:ProcessAddressV2010Q2Response</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con1:expr>
+                      </con1:replace>
+                    </con3:responseTransform>
+                  </con3:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ProcessContacts">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="ProcessContactsRoute">
+                <con:context>
+                  <con2:userNsDecl namespace="http://webservices.globaladdress.net" prefix="ext"/>
+                  <con2:varNsDecl namespace="http://www.elsevier.com/ContactService/" prefix="con"/>
+                </con:context>
+                <con:actions>
+                  <con3:route>
+                    <con2:id>_ActionId-4069371563493078775-5aa45653.1390ac58d15.-7f5e</con2:id>
+                    <con3:service ref="ent-addr-v4/business/TrilliumService" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con3:operation>ProcessMultipleAddressesV2010Q2</con3:operation>
+                    <con3:outboundTransform>
+                      <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-4069371563493078775-5aa45653.1390ac58d15.-7f26</con2:id>
+                        <con1:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="ent-addr-v4/transformation/TransformProcessContactsRequest"/>
+                            <con2:param name="processContacts1">
+                              <con2:path>$body/con:ProcessContacts</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con1:expr>
+                      </con1:replace>
+                    </con3:outboundTransform>
+                    <con3:responseTransform>
+                      <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-4069371563493078775-5aa45653.1390ac58d15.-7eee</con2:id>
+                        <con1:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="ent-addr-v4/transformation/TransformProcessContactsResponse"/>
+                            <con2:param name="processMultipleAddressesV2010Q2Response1">
+                              <con2:path>$body/ext:ProcessMultipleAddressesV2010Q2Response</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con1:expr>
+                      </con1:replace>
+                    </con3:responseTransform>
+                  </con3:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
           <con:default-branch>
             <con:flow>
               <con:pipeline-node name="HandleUnsupportedOpsPipelinePair">

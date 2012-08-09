@@ -36,6 +36,52 @@
 			</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="ProcessContact">
+      	<xsd:complexType>
+      		<xsd:sequence>
+				<xsd:element minOccurs="1" maxOccurs="1" name="ContactPostal" type="osb:ContactPostalType"/>
+      			<xsd:element minOccurs="1" maxOccurs="1" name="AcceptanceLevel" type="xsd:int"></xsd:element>
+      			<xsd:element minOccurs="1" maxOccurs="1" name="InnerLevel" type="xsd:int"></xsd:element>
+      			<xsd:element minOccurs="1" maxOccurs="1" name="OuterLevel" type="xsd:int"></xsd:element>
+      			<xsd:element minOccurs="0" maxOccurs="1" name="EnhancementDatasetName" type="xsd:string"></xsd:element>
+      			
+      			<xsd:element minOccurs="0" maxOccurs="1" name="Options" type="osb:COptimaOptionSet"></xsd:element>
+
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ProcessContactResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+			<xsd:element name="Result" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" maxOccurs="1" name="ContactPostal" type="osb:ContactPostalType"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ProcessContacts">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+				<xsd:element minOccurs="1" maxOccurs="unbounded" name="ContactPostal" type="osb:ContactPostalType"/>
+      			<xsd:element minOccurs="1" maxOccurs="1" name="AcceptanceLevel" type="xsd:int"></xsd:element>
+      			<xsd:element minOccurs="1" maxOccurs="1" name="InnerLevel" type="xsd:int"></xsd:element>
+      			<xsd:element minOccurs="1" maxOccurs="1" name="OuterLevel" type="xsd:int"></xsd:element>
+      			<xsd:element minOccurs="0" maxOccurs="1" name="EnhancementDatasetName" type="xsd:string"></xsd:element>
+      			
+      			<xsd:element minOccurs="0" maxOccurs="1" name="Options" type="osb:COptimaOptionSet"></xsd:element>
+
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ProcessContactsResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+			<xsd:element name="Result" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="ContactPostal" type="osb:ContactPostalType"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="FormatContactRequest">
@@ -50,6 +96,18 @@
   <wsdl:message name="SearchContactResponse">
   	<wsdl:part name="parameters" element="tns:SearchContactResponse"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="ProcessContactRequest">
+  	<wsdl:part name="parameters" element="tns:ProcessContact"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ProcessContactResponse">
+  	<wsdl:part name="parameters" element="tns:ProcessContactResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ProcessContactsRequest">
+  	<wsdl:part name="parameters" element="tns:ProcessContacts"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ProcessContactsResponse">
+  	<wsdl:part name="parameters" element="tns:ProcessContactsResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="ContactService">
     <wsdl:operation name="FormatContact">
       <wsdl:input message="tns:FormatContactRequest"/>
@@ -58,6 +116,14 @@
     <wsdl:operation name="SearchContact">
     	<wsdl:input message="tns:SearchContactRequest"></wsdl:input>
     	<wsdl:output message="tns:SearchContactResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessContact">
+    	<wsdl:input message="tns:ProcessContactRequest"></wsdl:input>
+    	<wsdl:output message="tns:ProcessContactResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessContacts">
+    	<wsdl:input message="tns:ProcessContactsRequest"></wsdl:input>
+    	<wsdl:output message="tns:ProcessContactsResponse"></wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ContactServiceSOAP" type="tns:ContactService">
@@ -73,6 +139,24 @@
     </wsdl:operation>
         <wsdl:operation name="SearchContact">
       <soap:operation soapAction="http://www.elsevier.com/ContactService/SearchContact"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+     <wsdl:operation name="ProcessContact">
+      <soap:operation soapAction="http://www.elsevier.com/ContactService/ProcessContact"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+         <wsdl:operation name="ProcessContacts">
+      <soap:operation soapAction="http://www.elsevier.com/ContactService/ProcessContact"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
