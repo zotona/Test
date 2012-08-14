@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="TowerRestToSOAP/wsdl/Tower"/>
+      <con:port>
+        <con:name>TowerSOAP</con:name>
+        <con:namespace>http://www.elsevier.com/Tower/</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/TowerRestToSOAP/proxy/TowerProxy</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:flow>
+      <con:branch-node type="operation" name="ValidateEmail">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="ValidateEmail">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="ValidateEmailRoute">
+                <con:context>
+                  <con1:userNsDecl namespace="http://www.elsevier.com/Tower/" prefix="tow"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-2980489570356805702--5eabcd04.139109ab73d.-7f0c</con1:id>
+                    <con2:service ref="TowerRestToSOAP/business/TowerService" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:outboundTransform>
+                      <con3:transport-headers copy-all="true">
+                        <con1:id>_ActionId-2980489570356805702--5eabcd04.139109ab73d.-7ed4</con1:id>
+                        <con3:header-set>outbound-request</con3:header-set>
+                      </con3:transport-headers>
+                      <con3:insert varName="outbound">
+                        <con1:id>_ActionId-2980489570356805702--5eabcd04.139109ab73d.-7eb7</con1:id>
+                        <con3:location>
+                          <con1:xpathText>./ctx:transport/ctx:request</con1:xpathText>
+                        </con3:location>
+                        <con3:where>first-child</con3:where>
+                        <con3:expr>
+                          <con1:xqueryText>&lt;http:http-method>GET&lt;/http:http-method></con1:xqueryText>
+                        </con3:expr>
+                      </con3:insert>
+                      <con3:insert varName="outbound">
+                        <con1:id>_ActionId-2980489570356805702--5eabcd04.139109ab73d.-7e2c</con1:id>
+                        <con3:location>
+                          <con1:xpathText>./ctx:transport/ctx:request</con1:xpathText>
+                        </con3:location>
+                        <con3:where>first-child</con3:where>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="TowerRestToSOAP/transformation/TowerSOAPToParameters"/>
+                            <con1:param name="validateEmail1">
+                              <con1:path>$body/tow:ValidateEmail</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:insert>
+                      <con3:assign varName="contactElectronic">
+                        <con1:id>_ActionId-5605972847792105817--5290cc32.1391f76e119.-7d84</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText>$body/tow:ValidateEmail/ContactElectronic</con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-5605972847792105817--5290cc32.1391f76e119.-7be4</con1:id>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="TowerRestToSOAP/transformation/TransformTowerResponseToSOAP"/>
+                            <con1:param name="Q">
+                              <con1:path>fn:substring-before(fn:substring-after($jsonResp,
+     "ok"":"),",")</con1:path>
+                            </con1:param>
+                            <con1:param name="contactElectronic1">
+                              <con1:path>$contactElectronic</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

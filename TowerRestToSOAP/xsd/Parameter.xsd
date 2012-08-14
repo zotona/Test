@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/Parameter" xmlns:tns="http://www.example.org/Parameter" elementFormDefault="qualified">
+
+<xs:element name="query-parameters" type="tns:query-parameters-type"/>
+
+
+    <xs:complexType name="query-parameters-type">
+        <xs:sequence>
+            <xs:element name="parameter" type="tns:parameter-type" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="parameter-type">
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="value" type="xs:string" />
+    </xs:complexType>
+
+
+
+</xs:schema>
