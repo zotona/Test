@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:sb="http://www.bea.com/wli/sb/transports/sb">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con4:SoapBindingType" xmlns:con4="http://www.bea.com/wli/sb/services/bindings/config">
+      <con4:wsdl ref="Tower-Split-Join/wsdl/Tower"/>
+      <con4:port>
+        <con4:name>TowerSOAP</con4:name>
+        <con4:namespace>http://www.elsevier.com/Tower/</con4:namespace>
+      </con4:port>
+      <con4:selector type="SOAP body"/>
+      <con4:WSI-compliant>false</con4:WSI-compliant>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>sb</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>TestProxy</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <sb:inbound-properties>
+        <sb:use-ssl>false</sb:use-ssl>
+      </sb:inbound-properties>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:flow>
+      <con:route-node name="RouteNode1">
+        <con:context>
+          <con2:varNsDecl namespace="http://www.elsevier.com/Tower/" prefix="tow"/>
+        </con:context>
+        <con:actions>
+          <con1:route>
+            <con2:id>_ActionId-2432885677211724114--47e74fa4.139242f85df.-7e9c</con2:id>
+            <con1:service ref="TowerRestToSOAP/proxy/TowerProxy" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>ValidateEmail</con1:operation>
+            <con1:outboundTransform>
+              <con3:log xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                <con2:id>_ActionId-6188269223615696635--25162556.13929716600.-7f91</con2:id>
+                <con3:logLevel>warning</con3:logLevel>
+                <con3:expr>
+                  <con2:xqueryText>$body</con2:xqueryText>
+                </con3:expr>
+                <con3:message>Request body</con3:message>
+              </con3:log>
+            </con1:outboundTransform>
+            <con1:responseTransform>
+              <con3:log xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                <con2:id>_ActionId-6188269223615696635--25162556.13929716600.-7f06</con2:id>
+                <con3:logLevel>warning</con3:logLevel>
+                <con3:expr>
+                  <con2:xqueryText>$body</con2:xqueryText>
+                </con3:expr>
+                <con3:message>Test Proxy response body</con3:message>
+              </con3:log>
+              <con3:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-6188269223615696635--25162556.13929716600.-7ee9</con2:id>
+                <con3:expr>
+                  <con2:xqueryTransform>
+                    <con2:resource ref="Tower-Split-Join/transformation/TransformResponse"/>
+                    <con2:param name="validateEmailResponse1">
+                      <con2:path>$body/tow:ValidateEmailResponse</con2:path>
+                    </con2:param>
+                  </con2:xqueryTransform>
+                </con3:expr>
+              </con3:replace>
+              <con3:log xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                <con2:id>_ActionId-6188269223615696635--25162556.13929716600.-7fc9</con2:id>
+                <con3:logLevel>warning</con3:logLevel>
+                <con3:expr>
+                  <con2:xqueryText>fn-bea:inlinedXML($body/soap-env:Fault/detail)</con2:xqueryText>
+                </con3:expr>
+                <con3:message>Response body inline fault</con3:message>
+              </con3:log>
+            </con1:responseTransform>
+          </con1:route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>
