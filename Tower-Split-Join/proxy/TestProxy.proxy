@@ -72,17 +72,6 @@
                 </con3:expr>
                 <con3:message>Test Proxy response body</con3:message>
               </con3:log>
-              <con3:replace varName="body" contents-only="true">
-                <con2:id>_ActionId-6188269223615696635--25162556.13929716600.-7ee9</con2:id>
-                <con3:expr>
-                  <con2:xqueryTransform>
-                    <con2:resource ref="Tower-Split-Join/transformation/TransformResponse"/>
-                    <con2:param name="validateEmailResponse1">
-                      <con2:path>$body/tow:ValidateEmailResponse</con2:path>
-                    </con2:param>
-                  </con2:xqueryTransform>
-                </con3:expr>
-              </con3:replace>
               <con3:log xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                 <con2:id>_ActionId-6188269223615696635--25162556.13929716600.-7fc9</con2:id>
                 <con3:logLevel>warning</con3:logLevel>
