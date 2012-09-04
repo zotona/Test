@@ -151,7 +151,21 @@ declare function xf:TransformProcessAddressesResponse($processMultipleAddressesV
                             return
                                 <Longitude>{ data($Longitude) }</Longitude>
                         }
-   
+                        
+                        {
+                            for $Metadata1 in $processMultipleAddressesV2010Q2Response1/ns0:returnData/ns0:MetaData
+                            return if ($Metadata1/ns0:mType = 'providername')
+                                then <ProviderName>{ data($Metadata1/ns0:sValue) }</ProviderName>
+                                else ()
+                        }
+                        
+                        {
+                            for $Metadata2 in $processMultipleAddressesV2010Q2Response1/ns0:returnData/ns0:MetaData
+                            return if ($Metadata2/ns0:mType = 'providertype')
+                                then <ProviderType>{ data($Metadata2/ns0:sValue) }</ProviderType>
+                                else ()
+                        } 
+                          
                         {
                             for $ACR in $Contact/ns0:ACR
                             return

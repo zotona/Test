@@ -149,6 +149,21 @@ declare function xf:TransformSearchAddressResponse($searchAddressV2010Q2Response
                             return
                                 <Longitude>{ data($Other10) }</Longitude>
                         }
+                        
+                                                {
+                            for $Metadata1 in $searchAddressV2010Q2Response1/ns0:returnData/ns0:MetaData
+                            return if ($Metadata1/ns0:mType = 'providername')
+                                then <ProviderName>{ data($Metadata1/ns0:sValue) }</ProviderName>
+                                else ()
+                        }
+                        
+                        {
+                            for $Metadata2 in $searchAddressV2010Q2Response1/ns0:returnData/ns0:MetaData
+                            return if ($Metadata2/ns0:mType = 'providertype')
+                                then <ProviderType>{ data($Metadata2/ns0:sValue) }</ProviderType>
+                                else ()
+                        }
+                        
                         {
                             for $ACR in $Contact/ns0:ACR
                             return

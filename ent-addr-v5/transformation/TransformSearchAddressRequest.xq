@@ -145,7 +145,91 @@ declare function xf:TransformSearchAddressRequest($searchAddress1 as element(ns2
                     else 
                         data($searchAddress1/MaxResults)
                 }
-</ns0:maxresults>
+			</ns0:maxresults>
+
+            <ns0:returnData>
+			<ns0:MetaData>
+			   <ns0:mType>providername</ns0:mType>
+			   <ns0:sValue></ns0:sValue>
+			</ns0:MetaData>
+				<ns0:MetaData>
+			   <ns0:mType>providertype</ns0:mType>
+			   <ns0:sValue></ns0:sValue>
+			</ns0:MetaData>
+		 	</ns0:returnData>
+
+            
+            {	
+            	let $c := fn:normalize-space(string($searchAddress1/Options))
+            	return if ($c = "")
+            	then
+            		<ns0:Options>
+						<ns0:Options>
+						    <ns0:COptimaOption>
+				                <ns0:OptionNumber>CarryStandardisationChanges</ns0:OptionNumber>
+				                <ns0:OptionValue>1</ns0:OptionValue>
+				            </ns0:COptimaOption>
+				            <ns0:COptimaOption>
+				                <ns0:OptionNumber>GeocodeSearchResults</ns0:OptionNumber>
+				                <ns0:OptionValue>1</ns0:OptionValue>
+				            </ns0:COptimaOption>
+				        </ns0:Options>
+			        </ns0:Options>
+            	else
+                for $Options in $searchAddress1/Options
+                return
+                    <ns0:Options>
+                        {
+                            for $Options0 in $Options/OptionsMain
+                            return 
+                                <ns0:Options>
+                                    {
+                                        for $COptimaOption in $Options0/COptimaOption
+                                        return
+                                            <ns0:COptimaOption>
+                                                <ns0:OptionNumber>{ data($COptimaOption/OptionName) }</ns0:OptionNumber>
+                                                <ns0:OptionValue>{ data($COptimaOption/OptionValue) }</ns0:OptionValue>
+                                            </ns0:COptimaOption>
+                                    }
+                                </ns0:Options>
+                             
+                        }
+                        {
+                            for $OptionMasks in $Options/OptionsMask
+                            return
+                                <ns0:OptionMasks>
+                                    {
+                                        for $COptimaOptionMasks in $OptionMasks/COptimaOptionMasks
+                                        return
+                                            <ns0:COptimaOptionMasks>
+                                                <ns0:OptionNumber>{ data($COptimaOptionMasks/OptionName) }</ns0:OptionNumber>
+                                                <ns0:FieldNumber>{ data($COptimaOptionMasks/FieldName) }</ns0:FieldNumber>
+                                                <ns0:OptionValue>{ data($COptimaOptionMasks/OptionValue) }</ns0:OptionValue>
+                                            </ns0:COptimaOptionMasks>
+                                    }
+                                </ns0:OptionMasks>
+                        }
+                        {
+                            for $OptionsOther in $Options/OptionsOther
+                            return
+                                <ns0:OptionsOther>
+                                    {
+                                        for $COptimaOptionOther in $OptionsOther/COptimaOptionOther
+                                        return
+                                            <ns0:COptimaOptionOther>
+                                                <ns0:OptionName>{ data($COptimaOptionOther/OptionName) }</ns0:OptionName>
+                                                {
+                                                    for $OptionValue in $COptimaOptionOther/OptionValue
+                                                    return
+                                                        <ns0:OptionValue>{ data($OptionValue) }</ns0:OptionValue>
+                                                }
+                                            </ns0:COptimaOptionOther>
+                                    }
+                                </ns0:OptionsOther>
+                        }
+                    </ns0:Options>
+            }
+
         </ns0:SearchAddressV2010Q2>
 };
 

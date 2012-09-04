@@ -14,12 +14,12 @@ declare function xf:TransformProcessAddressResponse($processAddressV2010Q2Respon
     as element(ns2:ProcessAddressResponse) {
         <ns2:ProcessAddressResponse>
             <Result>{ data($processAddressV2010Q2Response1/ns0:ProcessAddressV2010Q2Result) }</Result>
+            
             {
                 for $contact in $processAddressV2010Q2Response1/ns0:contact
-                let $TheACR:= data( $contact/ns0:ACR )
+                                let $TheACR:= data( $contact/ns0:ACR )
                 return
                     <AddressPostal>
-                   
                         {
                             for $AddressLine1 in $contact/ns0:AddressLine1
                             return
@@ -83,12 +83,12 @@ declare function xf:TransformProcessAddressResponse($processAddressV2010Q2Respon
                         {
                             for $Premise in $contact/ns0:Premise
                             return
-                                <Premise status="{ fn:substring($TheACR,5,1) }">{ data($Premise) }</Premise>
+                                <Premise status = "{ fn:substring($TheACR,5,1) }">{ data($Premise) }</Premise>
                         }
                         {
                             for $Street in $contact/ns0:Street
                             return
-                                <Street status="{ fn:substring($TheACR,7,1) }">{ data($Street) }</Street>
+                                <Street status = "{ fn:substring($TheACR,7,1) }">{ data($Street) }</Street>
                         }
                         {
                             for $SubStreet in $contact/ns0:SubStreet
@@ -103,12 +103,12 @@ declare function xf:TransformProcessAddressResponse($processAddressV2010Q2Respon
                         {
                             for $City in $contact/ns0:City
                             return
-                                <City status="{ fn:substring($TheACR,11,1) }">{ data($City) }</City>
+                                <City status = "{ fn:substring($TheACR,11,1) }">{ data($City) }</City>
                         }
                         {
                             for $SubCity in $contact/ns0:SubCity
                             return
-                                <SubCity status="{ fn:substring($TheACR,9,1) }">{ data($SubCity) }</SubCity>
+                                <SubCity status = "{ fn:substring($TheACR,9,1) }">{ data($SubCity) }</SubCity>
                         }
                         {
                             for $Principality in $contact/ns0:Principality
@@ -118,12 +118,12 @@ declare function xf:TransformProcessAddressResponse($processAddressV2010Q2Respon
                         {
                             for $Region in $contact/ns0:Region
                             return
-                                <Region status="{ fn:substring($TheACR,13,1) }">{ data($Region) }</Region>
+                                <Region status = "{ fn:substring($TheACR,13,1) }">{ data($Region) }</Region>
                         }
                         {
                             for $Postcode in $contact/ns0:Postcode
                             return
-                                <Postcode status="{ fn:substring($TheACR,15,1) }">{ data($Postcode) }</Postcode>
+                                <Postcode status = "{ fn:substring($TheACR,15,1) }">{ data($Postcode) }</Postcode>
                         }
                         {
                             for $DPS in $contact/ns0:DPS
@@ -135,29 +135,40 @@ declare function xf:TransformProcessAddressResponse($processAddressV2010Q2Respon
                             return
                                 <Cedex>{ data($Cedex) }</Cedex>
                         }
-                        (:dummy mapping in Country using a sequence:)
                         {
                             for $Country in $contact/ns0:Country
-                            return 
-                                <Country status="{ $seq[xs:integer(fn:substring($TheACR,17,1))+1] }">{ data($Country) }</Country>
+                            return
+                                <Country status = "{ fn:substring($TheACR,17,1) }">{ data($Country) }</Country>
                         }
                         {
                             for $CountryISO in $contact/ns0:CountryISO
                             return
                                 <CountryISO>{ data($CountryISO) }</CountryISO>
                         }
+                        {
+                            for $Other9 in $contact/ns0:Other9
+                            return
+                                <Latitude>{ data($Other9) }</Latitude>
+                        }
+                        {
+                            for $Other10 in $contact/ns0:Other10
+                            return
+                                <Longitude>{ data($Other10) }</Longitude>
+                        }
+                        {
+                            for $Metadata1 in $processAddressV2010Q2Response1/ns0:returnData/ns0:MetaData
+                            return if ($Metadata1/ns0:mType = 'providername')
+                                then <ProviderName>{ data($Metadata1/ns0:sValue) }</ProviderName>
+                                else ()
+                        }
                         
-                                                {
-                            for $Latitude in $contact/ns0:Other9
-                            return
-                                <Latitude>{ data($Latitude) }</Latitude>
+                        {
+                            for $Metadata2 in $processAddressV2010Q2Response1/ns0:returnData/ns0:MetaData
+                            return if ($Metadata2/ns0:mType = 'providertype')
+                                then <ProviderType>{ data($Metadata2/ns0:sValue) }</ProviderType>
+                                else ()
                         }
-                                                {
-                            for $Longitude in $contact/ns0:Other10
-                            return
-                                <Longitude>{ data($Longitude) }</Longitude>
-                        }
-   
+
                         {
                             for $ACR in $contact/ns0:ACR
                             return
@@ -174,8 +185,7 @@ declare function xf:TransformProcessAddressResponse($processAddressV2010Q2Respon
                             for $ACR in $contact/ns0:ACR
                             return
                             <SupplierQuality>{$TheACR}</SupplierQuality>
-                        }                        
-
+                        } 
                         
                     </AddressPostal>
             }
@@ -183,6 +193,5 @@ declare function xf:TransformProcessAddressResponse($processAddressV2010Q2Respon
 };
 
 declare variable $processAddressV2010Q2Response1 as element(ns0:ProcessAddressV2010Q2Response) external;
-
 
 xf:TransformProcessAddressResponse($processAddressV2010Q2Response1)

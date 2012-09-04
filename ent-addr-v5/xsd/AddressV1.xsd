@@ -40,6 +40,8 @@
 			<xs:element minOccurs="0" maxOccurs="1" name="CountryISO" type="xs:string"/>
 			<xs:element minOccurs="0" maxOccurs="1" name="Latitude" type="xs:string"/>
 			<xs:element minOccurs="0" maxOccurs="1" name="Longitude" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="ProviderName" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="ProviderType" type="xs:string"/>
 			<xs:group ref="adr:QualityGroup"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -78,8 +80,8 @@
 	</xs:simpleType>	
 	<xs:complexType name="COptimaOptionSet">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="1" name="Options" type="adr:ArrayOfCOptimaOption"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="OptionMasks" type="adr:ArrayOfCOptimaOptionMasks"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="OptionsMain" type="adr:ArrayOfCOptimaOption"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="OptionsMask" type="adr:ArrayOfCOptimaOptionMasks"/>
 			<xs:element minOccurs="0" maxOccurs="1" name="OptionsOther" type="adr:ArrayOfCOptimaOptionOther"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -90,7 +92,7 @@
 	</xs:complexType>
 	<xs:complexType name="COptimaOption">
 		<xs:sequence>
-			<xs:element minOccurs="1" maxOccurs="1" name="OptionNumber" type="adr:OON"/>
+			<xs:element minOccurs="1" maxOccurs="1" name="OptionName" type="adr:OON"/>
 			<xs:element minOccurs="1" maxOccurs="1" name="OptionValue" type="xs:int"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -174,8 +176,8 @@
 	</xs:complexType>
 	<xs:complexType name="COptimaOptionMasks">
 		<xs:sequence>
-			<xs:element minOccurs="1" maxOccurs="1" name="OptionNumber" type="adr:OON"/>
-			<xs:element minOccurs="1" maxOccurs="1" name="FieldNumber" type="adr:OFT"/>
+			<xs:element minOccurs="1" maxOccurs="1" name="OptionName" type="adr:OON"/>
+			<xs:element minOccurs="1" maxOccurs="1" name="FieldName" type="adr:OFT"/>
 			<xs:element minOccurs="1" maxOccurs="1" name="OptionValue" type="xs:boolean"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -268,4 +270,9 @@
 			<xs:enumeration value="GeocodeSelectResults"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="ExcludeType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="unbounded" name="Exclude" nillable="true" type="adr:OFT"/>
+		</xs:sequence>
+	</xs:complexType>	
 </xs:schema>

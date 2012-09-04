@@ -8,6 +8,7 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="User" type="adr:UserType"></xsd:element>
+            <xsd:element minOccurs="0" maxOccurs="1" name="Options" type="adr:COptimaOptionSet"></xsd:element>
             <xsd:element minOccurs="1" maxOccurs="1" name="AddressPostal" type="adr:AddressPostalType"/>
           </xsd:sequence>
         </xsd:complexType>
