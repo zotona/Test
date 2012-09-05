@@ -31,7 +31,7 @@
     <tran:provider-id>http</tran:provider-id>
     <tran:inbound>true</tran:inbound>
     <tran:URI>
-      <env:value>/ent-addr-v5/proxy/AddressService</env:value>
+      <env:value>/osb/AddressService/V0.1</env:value>
     </tran:URI>
     <tran:inbound-properties/>
     <tran:all-headers>false</tran:all-headers>
@@ -75,14 +75,6 @@
                     <con3:service ref="ent-addr-v5/business/TrilliumService" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                     <con3:operation>FormatAddressV2010Q2</con3:operation>
                     <con3:outboundTransform>
-                      <con4:log>
-                        <con2:id>_ActionId-8733845934955623658-6c32c5e2.13990b4d184.-7d46</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>Incoming XML req</con4:message>
-                      </con4:log>
                       <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-187613913637462321--6c5db1d6.138ec1530e5.-7f24</con2:id>
                         <con1:expr>
@@ -94,24 +86,8 @@
                           </con2:xqueryTransform>
                         </con1:expr>
                       </con1:replace>
-                      <con4:log>
-                        <con2:id>_ActionId-2814316360841679847-21f6fe4f.1394e126953.-7f21</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>Body after request replace</con4:message>
-                      </con4:log>
                     </con3:outboundTransform>
                     <con3:responseTransform>
-                      <con4:log>
-                        <con2:id>_ActionId-5590717051543525822-5d197cb1.13972864713.-7fc5</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>Response body Format Ex</con4:message>
-                      </con4:log>
                       <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-187613913637462321--6c5db1d6.138ec1530e5.-7efa</con2:id>
                         <con1:expr>
@@ -123,14 +99,6 @@
                           </con2:xqueryTransform>
                         </con1:expr>
                       </con1:replace>
-                      <con4:log>
-                        <con2:id>_ActionId-2814316360841679847-21f6fe4f.1394e126953.-7f04</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>Body after Response replace</con4:message>
-                      </con4:log>
                     </con3:responseTransform>
                   </con3:route>
                 </con:actions>
@@ -152,14 +120,6 @@
                     <con3:service ref="ent-addr-v5/business/TrilliumService" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                     <con3:operation>SearchAddressV2010Q2</con3:operation>
                     <con3:outboundTransform>
-                      <con4:log>
-                        <con2:id>_ActionId-8733845934955623658-6c32c5e2.13990b4d184.-7e60</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>incoming Search req xml</con4:message>
-                      </con4:log>
                       <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-825550576943996775-43782ef7.138fba4eb43.-7f4c</con2:id>
                         <con1:expr>
@@ -171,24 +131,8 @@
                           </con2:xqueryTransform>
                         </con1:expr>
                       </con1:replace>
-                      <con4:log>
-                        <con2:id>_ActionId-7199922087897766895--4556fad4.1395306308c.-7fab</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>After Search addr req replace</con4:message>
-                      </con4:log>
                     </con3:outboundTransform>
                     <con3:responseTransform>
-                      <con4:log>
-                        <con2:id>_ActionId-8733845934955623658-6c32c5e2.13990b4d184.-7e28</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>Trillium resp</con4:message>
-                      </con4:log>
                       <con1:replace contents-only="true" varName="body">
                         <con2:id>_ActionId-825550576943996775-43782ef7.138fba4eb43.-7f14</con2:id>
                         <con1:expr>
@@ -200,14 +144,6 @@
                           </con2:xqueryTransform>
                         </con1:expr>
                       </con1:replace>
-                      <con4:log>
-                        <con2:id>_ActionId-7199922087897766895--4556fad4.1395306308c.-7f72</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>Body after response replace</con4:message>
-                      </con4:log>
                     </con3:responseTransform>
                   </con3:route>
                 </con:actions>
@@ -229,14 +165,6 @@
                     <con3:service ref="ent-addr-v5/business/TrilliumService" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                     <con3:operation>ProcessAddressV2010Q2</con3:operation>
                     <con3:outboundTransform>
-                      <con4:log>
-                        <con2:id>_ActionId-8733845934955623658-6c32c5e2.13990b4d184.-7fc9</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>Incoming XML request</con4:message>
-                      </con4:log>
                       <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-4727687184013825418-6da6191d.139067722b5.-7e3f</con2:id>
                         <con1:expr>
@@ -248,14 +176,6 @@
                           </con2:xqueryTransform>
                         </con1:expr>
                       </con1:replace>
-                      <con4:log>
-                        <con2:id>_ActionId-2814316360841679847-21f6fe4f.1394e126953.-7fac</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>After Process addr replace</con4:message>
-                      </con4:log>
                     </con3:outboundTransform>
                     <con3:responseTransform>
                       <con1:replace varName="body" contents-only="true">
@@ -269,14 +189,6 @@
                           </con2:xqueryTransform>
                         </con1:expr>
                       </con1:replace>
-                      <con4:log>
-                        <con2:id>_ActionId-2814316360841679847-21f6fe4f.1394e126953.-7f59</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>Body after response replace</con4:message>
-                      </con4:log>
                     </con3:responseTransform>
                   </con3:route>
                 </con:actions>
@@ -298,14 +210,6 @@
                     <con3:service ref="ent-addr-v5/business/TrilliumService" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                     <con3:operation>ProcessMultipleAddressesV2010Q2</con3:operation>
                     <con3:outboundTransform>
-                      <con4:log>
-                        <con2:id>_ActionId-8733845934955623658-6c32c5e2.13990b4d184.-7f40</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>incoming XML req</con4:message>
-                      </con4:log>
                       <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-4069371563493078775-5aa45653.1390ac58d15.-7f26</con2:id>
                         <con1:expr>
@@ -317,24 +221,8 @@
                           </con2:xqueryTransform>
                         </con1:expr>
                       </con1:replace>
-                      <con4:log>
-                        <con2:id>_ActionId-8733845934955623658-6c32c5e2.13990b4d184.-7f23</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>After req replace</con4:message>
-                      </con4:log>
                     </con3:outboundTransform>
                     <con3:responseTransform>
-                      <con4:log>
-                        <con2:id>_ActionId-8733845934955623658-6c32c5e2.13990b4d184.-7eeb</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>Resp from Trillium</con4:message>
-                      </con4:log>
                       <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-4069371563493078775-5aa45653.1390ac58d15.-7eee</con2:id>
                         <con1:expr>
@@ -346,14 +234,6 @@
                           </con2:xqueryTransform>
                         </con1:expr>
                       </con1:replace>
-                      <con4:log>
-                        <con2:id>_ActionId-8733845934955623658-6c32c5e2.13990b4d184.-7ece</con2:id>
-                        <con4:logLevel>warning</con4:logLevel>
-                        <con4:expr>
-                          <con2:xqueryText>$body</con2:xqueryText>
-                        </con4:expr>
-                        <con4:message>After  resp replace</con4:message>
-                      </con4:log>
                     </con3:responseTransform>
                   </con3:route>
                 </con:actions>

@@ -30,13 +30,7 @@ declare function xf:TransformProcessAddressesRequest($processAddresses1 as eleme
                         <ns0:InnerAcceptancePC>80</ns0:InnerAcceptancePC>
                 } 
 				<ns0:OuterAcceptancePC>0</ns0:OuterAcceptancePC>
-
-            {
-                for $EnhancementDatasetName in $processAddresses1/EnhancementDatasetName
-                return
-                    <ns0:EnhancementDatasetName>{ data($EnhancementDatasetName) }</ns0:EnhancementDatasetName>
-            }
-            
+           
                         {
                 let $d := string($processAddresses1/EnhancementDatasetName)
             	return if ($d = "")
