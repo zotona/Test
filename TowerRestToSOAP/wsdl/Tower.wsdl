@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.elsevier.com/Tower/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Tower" targetNamespace="http://www.elsevier.com/Tower/">
   <wsdl:types>
-    <xsd:schema elementFormDefault="unqualified" attributeFormDefault="unqualified" targetNamespace="http://www.elsevier.com/Tower/"  xmlns:osb="http://www.elsevier.com/osb">
-    <xsd:import namespace="http://www.elsevier.com/osb"
-				schemaLocation="../xsd/ContactV1.xsd" />
+    <xsd:schema elementFormDefault="unqualified" attributeFormDefault="unqualified" targetNamespace="http://www.elsevier.com/Tower/"  xmlns:adr="http://www.elsevier.com/osb/adr">
+    <xsd:import namespace="http://www.elsevier.com/osb/adr"
+				schemaLocation="../xsd/AddressV1.xsd" />
       <xsd:element name="ValidateEmail">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="ContactElectronic" type="osb:ContactElectronicType"/>
+            <xsd:element name="AddressElectronic" type="adr:AddressElectronicType"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="ValidateEmailResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="ContactElectronic" type="osb:ContactElectronicType"/>
+            <xsd:element name="AddressElectronic" type="adr:AddressElectronicType"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>

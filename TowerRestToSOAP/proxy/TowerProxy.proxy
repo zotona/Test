@@ -31,7 +31,7 @@
     <tran:provider-id>http</tran:provider-id>
     <tran:inbound>true</tran:inbound>
     <tran:URI>
-      <env:value>/TowerRestToSOAP/proxy/TowerProxy</env:value>
+      <env:value>/osb/ElectronicAddressService/V0.1</env:value>
     </tran:URI>
     <tran:inbound-properties/>
     <tran:all-headers>false</tran:all-headers>
@@ -124,7 +124,7 @@
                             <con1:resource ref="TowerRestToSOAP/transformation/TransformTowerResponseToSOAP2"/>
                             <con1:param name="Q">
                               <con1:path>fn:substring-before(fn:substring-after($body/text(),
-     "ok"":"),",")</con1:path>
+     "email"":{"),"}")</con1:path>
                             </con1:param>
                             <con1:param name="query_parameters1">
                               <con1:path>$outbound/ctx:transport/ctx:request/http:query-parameters</con1:path>

@@ -2,7 +2,7 @@
 (:: pragma bea:global-element-return element="ns0:ValidateEmailResponse" location="../wsdl/Tower.wsdl" ::)
 
 declare namespace ns2 = "http://www.bea.com/wli/sb/transports/http";
-declare namespace ns1 = "http://www.elsevier.com/osb";
+declare namespace ns1 = "http://www.elsevier.com/osb/adr";
 declare namespace ns0 = "http://www.elsevier.com/Tower/";
 declare namespace xf = "http://tempuri.org/TowerRestToSOAP/transformation/TransformTowerResponseToSOAP2/";
 
@@ -10,7 +10,7 @@ declare function xf:TransformTowerResponseToSOAP2($Q as xs:string,
     $query_parameters1 as element(ns2:query-parameters))
     as element(ns0:ValidateEmailResponse) {
         <ns0:ValidateEmailResponse>
-            <ContactElectronic>
+            <AddressElectronic>
                 {
                     for $value in $query_parameters1/ns2:parameter[1]/@value
                     return
@@ -21,8 +21,11 @@ declare function xf:TransformTowerResponseToSOAP2($Q as xs:string,
                     return
                         <Type>{ data($name) }</Type>
                 }
-                <Quality1>{ $Q }</Quality1>
-            </ContactElectronic>
+              
+                <Quality>{ fn:substring-before(fn:substring-after($Q,"ok"":"),",")}</Quality>
+                <Match>{ fn:substring-before(fn:substring-after($Q,"status_code"":"),",")}</Match>
+                <SupplierQuality>{fn:substring-before(fn:substring-after($Q,"status_desc"":"""),""",")}</SupplierQuality>
+            </AddressElectronic>
         </ns0:ValidateEmailResponse>
 };
 
