@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:schemaEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:schema><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified" 
+targetNamespace="http://www.elsevier.com/osb" xmlns:osb="http://www.elsevier.com/osb" >
+	<xs:element name="Contact" type="osb:ContactType">
+		<xs:annotation>
+			<xs:documentation>Main postal and electronic contact info</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:complexType name="ContactType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="ContactPostal" type="osb:ContactPostalType"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="ContactElectronic" type="osb:ContactElectronicType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ContactPostalType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine1" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine2" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine3" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine4" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine5" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine6" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine7" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="AddressLine8" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Company" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Building" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="SubBuilding" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Department" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Premise" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Street" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="SubStreet" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="POBox" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="City" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="SubCity" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Principality" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Region" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Postcode" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="DPS" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Cedex" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Country" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="CountryISO" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="ACR" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="TCR" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other1" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other2" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other3" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other4" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other5" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other6" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other7" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other8" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other9" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Other10" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ContactElectronicType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Type" type="osb:StyleType"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="Quality1" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="StyleType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="email"/>
+			<xs:enumeration value="url"/>
+			<xs:enumeration value="ip"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+  <xs:complexType name="COptimaOptionSet">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Options" type="osb:ArrayOfCOptimaOption" />
+          <xs:element minOccurs="0" maxOccurs="1" name="OptionMasks" type="osb:ArrayOfCOptimaOptionMasks" />
+          <xs:element minOccurs="0" maxOccurs="1" name="OptionsOther" type="osb:ArrayOfCOptimaOptionOther" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfCOptimaOption">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="COptimaOption" nillable="true" type="osb:COptimaOption" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="COptimaOption">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="OptionNumber" type="osb:OON" />
+          <xs:element minOccurs="1" maxOccurs="1" name="OptionValue" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="OON">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SalutationLanguage" />
+          <xs:enumeration value="CountryLanguage" />
+          <xs:enumeration value="OverrideSalutationLanguage" />
+          <xs:enumeration value="NameCasing" />
+          <xs:enumeration value="AddressCasing" />
+          <xs:enumeration value="TelephoneCasing" />
+          <xs:enumeration value="NameWordCheck" />
+          <xs:enumeration value="AddressWordCheck" />
+          <xs:enumeration value="TelephoneWordCheck" />
+          <xs:enumeration value="ForceUpdate1" />
+          <xs:enumeration value="ForceUpdate2" />
+          <xs:enumeration value="ForceUpdate3" />
+          <xs:enumeration value="Deprecated1" />
+          <xs:enumeration value="NameFlagBadWord" />
+          <xs:enumeration value="AddressFlagBadWord" />
+          <xs:enumeration value="TelephoneFlagBadWord" />
+          <xs:enumeration value="Deprecated2" />
+          <xs:enumeration value="CautiousUpdate" />
+          <xs:enumeration value="EnforceBlanks" />
+          <xs:enumeration value="DedupeCommonErrors" />
+          <xs:enumeration value="FormatComponents1" />
+          <xs:enumeration value="FormatComponents2" />
+          <xs:enumeration value="FormatComponents3" />
+          <xs:enumeration value="StandardiseComponents1" />
+          <xs:enumeration value="StandardiseComponents2" />
+          <xs:enumeration value="StandardiseComponents3" />
+          <xs:enumeration value="ValidateComponents1" />
+          <xs:enumeration value="ValidateComponents2" />
+          <xs:enumeration value="ValidateComponents3" />
+          <xs:enumeration value="CompanyWeight" />
+          <xs:enumeration value="StreetWeight" />
+          <xs:enumeration value="CityWeight" />
+          <xs:enumeration value="PostcodeWeight" />
+          <xs:enumeration value="ShuffleLines" />
+          <xs:enumeration value="ConcatenationLines" />
+          <xs:enumeration value="OuterMatchscoreLines" />
+          <xs:enumeration value="CarryStandardisationChanges" />
+          <xs:enumeration value="ApplyReferenceAccents" />
+          <xs:enumeration value="ReturnUserData" />
+          <xs:enumeration value="SearchTimeout" />
+          <xs:enumeration value="ReplaceAlias1" />
+          <xs:enumeration value="ReplaceAlias2" />
+          <xs:enumeration value="ReplaceAlias3" />
+          <xs:enumeration value="ValidatedDataOnly" />
+          <xs:enumeration value="StandardisationDebugOutput" />
+          <xs:enumeration value="FormatSearchResults" />
+          <xs:enumeration value="CompareField1" />
+          <xs:enumeration value="CompareField2" />
+          <xs:enumeration value="CompareField3" />
+          <xs:enumeration value="AlwaysShow1" />
+          <xs:enumeration value="AlwaysShow2" />
+          <xs:enumeration value="AlwaysShow3" />
+          <xs:enumeration value="StandardiseComponents" />
+          <xs:enumeration value="RemoveNumerics" />
+          <xs:enumeration value="GeocodeSearchResults" />
+          <xs:enumeration value="Transliteration" />
+          <xs:enumeration value="StrictSelect" />
+          <xs:enumeration value="PhoneticAliasMatch" />
+          <xs:enumeration value="IgnoreEOLs" />
+          <xs:enumeration value="ReturnPremiseRanges" />
+          <xs:enumeration value="ConcatenateValidationRules" />
+          <xs:enumeration value="AddressValidationRuleOFT" />
+          <xs:enumeration value="EnhanceValidationRuleOFT" />
+          <xs:enumeration value="ExhaustiveValidation" />
+          <xs:enumeration value="ExhaustiveEnhancement" />
+          <xs:enumeration value="ExhaustiveSearchAddress" />
+          <xs:enumeration value="BusinessFlagSearchResults" />
+          <xs:enumeration value="EnhancedDataOnly" />
+          <xs:enumeration value="NumOptionsPlusOne" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="ArrayOfCOptimaOptionMasks">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="COptimaOptionMasks" nillable="true" type="osb:COptimaOptionMasks" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="COptimaOptionMasks">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="OptionNumber" type="osb:OON" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FieldNumber" type="osb:OFT" />
+          <xs:element minOccurs="1" maxOccurs="1" name="OptionValue" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="OFT">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="RecordID" />
+          <xs:enumeration value="Title" />
+          <xs:enumeration value="FirstName" />
+          <xs:enumeration value="MiddleInitials" />
+          <xs:enumeration value="LastName" />
+          <xs:enumeration value="FullName" />
+          <xs:enumeration value="NameSuffix" />
+          <xs:enumeration value="Gender" />
+          <xs:enumeration value="JobTitle" />
+          <xs:enumeration value="Salutation" />
+          <xs:enumeration value="Department" />
+          <xs:enumeration value="Company" />
+          <xs:enumeration value="Building" />
+          <xs:enumeration value="SubBuilding" />
+          <xs:enumeration value="Premise" />
+          <xs:enumeration value="Street" />
+          <xs:enumeration value="SubStreet" />
+          <xs:enumeration value="POBox" />
+          <xs:enumeration value="SubCity" />
+          <xs:enumeration value="City" />
+          <xs:enumeration value="Region" />
+          <xs:enumeration value="Principality" />
+          <xs:enumeration value="Postcode" />
+          <xs:enumeration value="Country" />
+          <xs:enumeration value="DPS" />
+          <xs:enumeration value="Cedex" />
+          <xs:enumeration value="MKN" />
+          <xs:enumeration value="MKA" />
+          <xs:enumeration value="MKC" />
+          <xs:enumeration value="ACR" />
+          <xs:enumeration value="WCR" />
+          <xs:enumeration value="NCR" />
+          <xs:enumeration value="TCR" />
+          <xs:enumeration value="ECR" />
+          <xs:enumeration value="Percent" />
+          <xs:enumeration value="Duplicate" />
+          <xs:enumeration value="DUPmaster" />
+          <xs:enumeration value="DUPconfidence" />
+          <xs:enumeration value="Other1" />
+          <xs:enumeration value="Other2" />
+          <xs:enumeration value="Other3" />
+          <xs:enumeration value="Other4" />
+          <xs:enumeration value="Other5" />
+          <xs:enumeration value="Other6" />
+          <xs:enumeration value="Other7" />
+          <xs:enumeration value="Other8" />
+          <xs:enumeration value="Other9" />
+          <xs:enumeration value="Other10" />
+          <xs:enumeration value="AddressLine1" />
+          <xs:enumeration value="AddressLine2" />
+          <xs:enumeration value="AddressLine3" />
+          <xs:enumeration value="AddressLine4" />
+          <xs:enumeration value="AddressLine5" />
+          <xs:enumeration value="AddressLine6" />
+          <xs:enumeration value="AddressLine7" />
+          <xs:enumeration value="AddressLine8" />
+          <xs:enumeration value="CountryISO" />
+          <xs:enumeration value="MobileTelephone" />
+          <xs:enumeration value="Telephone1" />
+          <xs:enumeration value="Telephone2" />
+          <xs:enumeration value="Telephone3" />
+          <xs:enumeration value="Telephone4" />
+          <xs:enumeration value="Email1" />
+          <xs:enumeration value="Email2" />
+          <xs:enumeration value="URL1" />
+          <xs:enumeration value="URL2" />
+          <xs:enumeration value="NumFieldsPlusOne" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="ArrayOfCOptimaOptionOther">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="COptimaOptionOther" nillable="true" type="osb:COptimaOptionOther" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="COptimaOptionOther">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="OptionName" type="osb:OtherOptions" />
+          <xs:element minOccurs="0" maxOccurs="1" name="OptionValue" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="OtherOptions">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="DefaultCountry" />
+          <xs:enumeration value="FormatSelectResults" />
+          <xs:enumeration value="GeocodeSelectResults" />
+        </xs:restriction>
+      </xs:simpleType>
+	
+	
+	
+</xs:schema>]]></con:schema>
+    <con:targetNamespace>http://www.elsevier.com/osb</con:targetNamespace>
+</con:schemaEntry>
